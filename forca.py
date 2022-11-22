@@ -6,6 +6,7 @@ Contato: jonasmelo@ufrj.br
 
 from random import randint
 from unicodedata import normalize, combining
+import turtle as t
 
 
 def main():
@@ -25,6 +26,7 @@ def main():
         if teste == mascara:
             vidas -= 1
             print(f'Você tem {vidas} vidas.')
+            boneco(vidas)
         else:
             print(" ".join(mascara))
 
@@ -78,6 +80,9 @@ def atualizar_mascara(palavra, mascara):
 
     return mascara
 
+def boneco(vidas):
+    '''cria e atualiza a representação gráfica da forca'''
+    return
 
 if __name__ == '__main__':
     main()
