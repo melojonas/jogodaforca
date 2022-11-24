@@ -6,7 +6,7 @@ Contato: jonasmelo@ufrj.br
 
 from random import randint
 from unicodedata import normalize, combining
-import turtle as t
+from turtle import *
 
 
 def main():
@@ -82,6 +82,18 @@ def atualizar_mascara(palavra, mascara):
 
 def boneco(vidas):
     '''cria e atualiza a representação gráfica da forca'''
+    '''
+    if vidas==5:
+    elif vidas==4:
+        
+    elif vidas==3:
+
+    elif vidas==2:
+
+    elif vidas==1:
+
+    elif vidas==0:
+    '''
     return
 
 if __name__ == '__main__':
