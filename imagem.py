@@ -12,7 +12,7 @@ def main():
     #iniciar turtle
     iniciar_turtle()
 
-    #criar objeto para atualizar vidas 
+    #criar objeto para atualizar vidas
     vidas = t.Turtle()
     n_vidas = 6
     atualizar_vidas(vidas, n_vidas)
@@ -24,7 +24,7 @@ def main():
     while ''.join(mascara) != palavra and n_vidas != 0:
         teste = mascara.copy()
         mascara = atualizar_mascara(palavra, mascara, posicoes)
-        
+
         if teste == mascara:
             n_vidas -= 1
             atualizar_vidas(vidas, n_vidas)
@@ -52,12 +52,13 @@ def escolher_palavra(modalidade):
                 'Quarentena','Quimera','Refeição','Reportagem','Sino','Taciturno','Temperança',
                 'Tênue','Ufanismo','Viscera']
 
-    if modalidade == '1':
-        return p_facil[randint(0, len(p_facil) -1)]
-    elif modalidade == '2':
+    if modalidade == '2':
         return p_dificil[randint(0, len(p_facil) -1)]
+    
+    return p_facil[randint(0, len(p_facil) -1)]
 
 def iniciar_turtle():
+    '''Inicia o modulo turtle e cria um fundo'''
     t.title('Jogo da Forca')
     screen = t.Screen()
     screen.setup(1090,730)
@@ -65,6 +66,7 @@ def iniciar_turtle():
     screen.bgpic('background.png')
 
 def escolher_modalidade():
+    '''Input do usuário que define a dificuldade do jogo'''
     modalidade = t.textinput('Insira um número', '(1) Fácil ou (2) Difícil: ')
     texto_mod = 'Fácil' if modalidade == '1' else 'Difícil'
 
@@ -80,21 +82,23 @@ def escolher_modalidade():
     return modalidade
 
 def atualizar_vidas(vidas, n_vidas):
+    '''cria um objeto do Turtle para atualizar o número de vidas'''
     vidas.clear()
-    
+
     vidas.hideturtle()
     vidas.color('white')
 
     vidas.penup()
     vidas.goto(300,270)
     vidas.pendown()
-    vidas.write(f'Vidas: ', True, align='right', font=('Arial',24,'normal'))
+    vidas.write('Vidas: ', True, align='right', font=('Arial',24,'normal'))
     vidas.write(f'{n_vidas}', align='left', font=('Arial',24,'normal'))
 
 def escrever_mascara(mascara):
+    '''Escreve underlines na tela'''
     t.hideturtle()
     t.color('white')
-    
+
     t.penup()
     t.goto(-250,-210)
     t.pendown()
@@ -105,9 +109,9 @@ def escrever_mascara(mascara):
 
     posicoes = []
 
-    for x in mascara:
+    for underline in mascara:
         posicoes.append(t.pos()[0])
-        t.write(x, True, align='left', font=('Arial',size_under,'normal'))
+        t.write(underline, True, align='left', font=('Arial',size_under,'normal'))
         t.penup()
         t.forward(space)
         t.pendown()
@@ -115,12 +119,13 @@ def escrever_mascara(mascara):
     return posicoes
 
 def atualizar_mascara(palavra, mascara, posicoes):
+    '''Escreve as letras caso o input esteja correto'''
     length = len(mascara)
     tam_letra = 54 - 2.7 * length
     x_letra = (70 - 3.2 * length) / 2
-    
+
     chute = t.textinput('Chute', 'Insira uma letra: ')
-        
+
     i = 0
     for word in palavra:
 
@@ -132,18 +137,19 @@ def atualizar_mascara(palavra, mascara, posicoes):
                 t.penup()
                 t.goto(posicoes[i] + x_letra,-200)
                 t.pendown()
-                t.write(word, True, align='center', font=('Arial',int(tam_letra),'normal'))
+                t.write(word, align='center', font=('Arial',int(tam_letra),'normal'))
         elif word.lower() == chute:
             mascara[i] = word
             t.penup()
             t.goto(posicoes[i] + x_letra,-200)
             t.pendown()
-            t.write(word, True, align='center', font=('Arial',int(tam_letra),'normal'))  
+            t.write(word, align='center', font=('Arial',int(tam_letra),'normal'))
         i += 1
-    
+
     return mascara
 
 def perdeu_ou_ganhou(palavra, mascara, n_vidas):
+    '''Avalia se o jogador completou a mascara ou zerou as vidas'''
     t.hideturtle()
     t.color('red')
 
