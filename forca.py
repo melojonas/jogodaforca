@@ -6,8 +6,6 @@ Contato: jonasmelo@ufrj.br
 
 from random import randint
 from unicodedata import normalize, combining
-from turtle import *
-
 
 def main():
     '''executa as funções que implementam o jogo'''
@@ -26,7 +24,6 @@ def main():
         if teste == mascara:
             vidas -= 1
             print(f'Você tem {vidas} vidas.')
-            boneco(vidas)
         else:
             print(" ".join(mascara))
 
@@ -51,7 +48,7 @@ def choose_word(modalidade):
                 'Eloquente','Esfirra','Esquerdo','Exceção','Filantropo','Fugaz',
                 'Gororoba','Heterossexual','Horrorizado','Idiossincrasia','Impacto',
                 'Inócuo','Independência','Jocoso','Laurel','Modernidade','Oftalmologista',
-                'Otorrinolaringologista','Panaceia','Paralelepípedo','Pororoca','Prognósticio',
+                'Panaceia','Paralelepípedo','Pororoca','Prognósticio',
                 'Quarentena','Quimera','Refeição','Reportagem','Sino','Taciturno','Temperança',
                 'Tênue','Ufanismo','Viscera']
 
@@ -79,22 +76,6 @@ def atualizar_mascara(palavra, mascara):
         i += 1
 
     return mascara
-
-def boneco(vidas):
-    '''cria e atualiza a representação gráfica da forca'''
-    '''
-    if vidas==5:
-    elif vidas==4:
-        
-    elif vidas==3:
-
-    elif vidas==2:
-
-    elif vidas==1:
-
-    elif vidas==0:
-    '''
-    return
 
 if __name__ == '__main__':
     main()
