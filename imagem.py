@@ -28,6 +28,7 @@ def main():
         if teste == mascara:
             n_vidas -= 1
             atualizar_vidas(vidas, n_vidas)
+            #desenhar_boneco(n_vidas)
 
     #avaliar e expor motivo de saída do loop
     perdeu_ou_ganhou(palavra, mascara, n_vidas)
@@ -53,7 +54,7 @@ def escolher_palavra(modalidade):
                 'Tênue','Ufanismo','Viscera']
 
     if modalidade == '2':
-        return p_dificil[randint(0, len(p_facil) -1)]
+        return p_dificil[randint(0, len(p_dificil) -1)]
     
     return p_facil[randint(0, len(p_facil) -1)]
 
