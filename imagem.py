@@ -1,5 +1,6 @@
+import json
 import turtle as t
-from random import randint
+from random import choice
 from unicodedata import normalize, combining
 
 
@@ -37,26 +38,13 @@ def main():
 
 def escolher_palavra(modalidade):
     '''retorna uma palavra conforme a modalidade escolhida'''
-    p_facil = ['Amarelo','Amiga','Amor','Ave','Avião','Avó','Balão',
-                'Bebê','Bolo','Branco','Cama','Caneca','Celular','Céu',
-                'Clube','Copo','Doce','Elefante','Escola','Estojo','Faca',
-                'Foto','Garfo','Geleia','Girafa','Janela','Limonada','Mãe',
-                'Meia','Noite','Óculos','Ônibus','Ovo','Pai','Pão','Parque',
-                'Passarinho','Peixe','Pijama','Rato','Umbigo']
-    p_dificil = ['Acender','Afilhado','Agnóstico','Ardiloso','Áspero','Assombração',
-                'Asterisco','Balaústre','Basquete','Caminho','Champanhe','Chiclete',
-                'Chuveiro','Coelho','Contexto','Convivência','Coração','Desalmado',
-                'Eloquente','Esfirra','Esquerdo','Exceção','Filantropo','Fugaz',
-                'Gororoba','Heterossexual','Horrorizado','Idiossincrasia','Impacto',
-                'Inócuo','Independência','Jocoso','Laurel','Modernidade','Oftalmologista',
-                'Panaceia','Paralelepípedo','Pororoca','Prognósticio',
-                'Quarentena','Quimera','Refeição','Reportagem','Sino','Taciturno','Temperança',
-                'Tênue','Ufanismo','Viscera']
 
-    if modalidade == '2':
-        return p_dificil[randint(0, len(p_dificil) -1)]
+    with open("data_file.json", "r") as read_file:
+        palavras = json.load(read_file)
     
-    return p_facil[randint(0, len(p_facil) -1)]
+    grupo = choice(list(palavras[modalidade].keys()))
+
+    return choice(palavras[modalidade][grupo])
 
 def iniciar_turtle():
     '''Inicia o modulo turtle e cria um fundo'''
@@ -69,7 +57,7 @@ def iniciar_turtle():
 def escolher_modalidade():
     '''Input do usuário que define a dificuldade do jogo'''
     modalidade = t.textinput('Insira um número', '(1) Fácil ou (2) Difícil: ')
-    texto_mod = 'Fácil' if modalidade == '1' else 'Difícil'
+    texto_mod = 'Facil' if modalidade == '1' else 'Dificil' #resolver problema de unicode UTF-8 no arquivo json
 
     t.hideturtle()
     t.color('white')
@@ -80,7 +68,7 @@ def escolher_modalidade():
     t.write('Modalidade: ', True, align='right', font=('Arial',24,'normal'))
     t.write(f'{texto_mod}', align='left', font=('Arial',24,'normal'))
 
-    return modalidade
+    return texto_mod
 
 def atualizar_vidas(vidas, n_vidas):
     '''cria um objeto do Turtle para atualizar o número de vidas'''

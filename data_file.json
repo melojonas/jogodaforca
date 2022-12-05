@@ -1,6 +1,76 @@
 {
-    "president": {
-        "name": "Zaphod Beeblebrox",
-        "species": "Betelgeusian"
+    "Facil": {
+        "Fruta": [
+            "Amora",
+            "Cereja",
+            "Banana",
+            "Morango",
+            "Laranja"
+        ],
+        "Objeto": [
+            "Bandeira",
+            "Chave",
+            "Chinelo",
+            "Janela",
+            "Mala"
+        ],
+        "Pa\u00eds": [
+            "Argentina",
+            "M\u00e9xico",
+            "Canad\u00e1",
+            "R\u00fassia",
+            "S\u00e9rvia"
+        ],
+        "Cor": [
+            "Azul",
+            "Salm\u00e3o",
+            "Rosa",
+            "Bege",
+            "Lil\u00e1s"
+        ],
+        "Animal": [
+            "Abelha",
+            "Foca",
+            "Hiena",
+            "Cachorro",
+            "Gato"
+        ]
+    },
+    "Dificil": {
+        "Fruta": [
+            "Damasco",
+            "carambola",
+            "Caqui",
+            "Framboesa",
+            "Tangerina"
+        ],
+        "Objeto": [
+            "Ma\u00e7aneta",
+            "Parafuso",
+            "Abajur",
+            "Envelope",
+            "Espelho"
+        ],
+        "Pa\u00eds": [
+            "Afeganist\u00e3o",
+            "Venezuela",
+            "Camar\u00f5es",
+            "Dinamarca",
+            "Hungria"
+        ],
+        "Cor": [
+            "Turquesa",
+            "S\u00e9pia",
+            "Carmesim",
+            "F\u00fachsia",
+            "\u00cdndigo"
+        ],
+        "Animal": [
+            "Flamingo",
+            "Guiaxinim",
+            "Golfinho",
+            "Hipop\u00f3tamo",
+            "Gar\u00e7a"
+        ]
     }
 }
