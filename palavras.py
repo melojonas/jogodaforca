@@ -8,7 +8,6 @@ def grupo_palavras(modalidade):
     pais_f = ['Argentina' , 'México' , 'Canadá' , 'Rússia' , 'Sérvia' ]
     cor_f = ['Azul' , 'Salmão' , 'Rosa' , 'Bege' , 'Lilás' ]
     animal_f = ['Abelha' , 'Foca' , 'Hiena' , 'Cachorro' , 'Gato' ]
-    objeto_f = ['Bandeira' , 'Chave' , 'Chinelo' , 'Janela' , 'Mala' ]
 
     
     sortf = [fruta_f,pais_f,animal_f,objeto_f,cor_f] #Armazena listas de grupo de palavras
