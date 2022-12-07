@@ -1,5 +1,5 @@
 {
-    "Facil": {
+    "Fácil": {
         "Fruta": [
             "Amora",
             "Cereja",
@@ -14,19 +14,19 @@
             "Janela",
             "Mala"
         ],
-        "Pa\u00eds": [
+        "País": [
             "Argentina",
-            "M\u00e9xico",
-            "Canad\u00e1",
-            "R\u00fassia",
-            "S\u00e9rvia"
+            "México",
+            "Canadá",
+            "Rússia",
+            "Sérvia"
         ],
         "Cor": [
             "Azul",
-            "Salm\u00e3o",
+            "Salmão",
             "Rosa",
             "Bege",
-            "Lil\u00e1s"
+            "Lilás"
         ],
         "Animal": [
             "Abelha",
@@ -36,7 +36,7 @@
             "Gato"
         ]
     },
-    "Dificil": {
+    "Difícil": {
         "Fruta": [
             "Damasco",
             "carambola",
@@ -45,32 +45,32 @@
             "Tangerina"
         ],
         "Objeto": [
-            "Ma\u00e7aneta",
+            "Maçaneta",
             "Parafuso",
             "Abajur",
             "Envelope",
             "Espelho"
         ],
-        "Pa\u00eds": [
-            "Afeganist\u00e3o",
+        "País": [
+            "Afeganistão",
             "Venezuela",
-            "Camar\u00f5es",
+            "Camarões",
             "Dinamarca",
             "Hungria"
         ],
         "Cor": [
             "Turquesa",
-            "S\u00e9pia",
+            "Sépia",
             "Carmesim",
-            "F\u00fachsia",
-            "\u00cdndigo"
+            "Fúchsia",
+            "Índigo"
         ],
         "Animal": [
             "Flamingo",
             "Guiaxinim",
             "Golfinho",
-            "Hipop\u00f3tamo",
-            "Gar\u00e7a"
+            "Hipopótamo",
+            "Garça"
         ]
     }
 }

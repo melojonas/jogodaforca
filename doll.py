@@ -79,14 +79,21 @@ perdeu.hideturtle()
 perdeu.color('gray','gray')
 
 #cabeça if = 1
+perdeu.goto(0,0)
+#perdeu.goto(-10,-10)
+perdeu.pendown()
+
 perdeu.begin_fill()
 perdeu.circle(50)
 perdeu.end_fill()
 
+perdeu.penup()
+perdeu.home()
 
 #tronco if=2
+perdeu.setheading(270)
+perdeu.pendown()
 
-perdeu.left(270)
 perdeu.forward(150)
 
 perdeu.penup()
@@ -94,31 +101,27 @@ perdeu.home()
 
 #Braço esquerdo if=3
 perdeu.goto(0,-25)
-perdeu.setheading(0)
+perdeu.setheading(300)
 perdeu.pendown()
 
-for x in range(45):
-    perdeu.seth(x)
-    perdeu.forward(2)
+perdeu.forward(75)
 
 perdeu.penup()
 perdeu.home()
 
 #braço direito if = 4
 perdeu.goto(0,-25)
-perdeu.setheading(180)
+perdeu.setheading(240)
 perdeu.pendown()
 
-for x in range(180,135,-1):
-    perdeu.seth(x)
-    perdeu.forward(2)
+perdeu.forward(75)
 
 perdeu.penup()
 perdeu.home()
 
 #perna esquerda if = 5
 perdeu.goto(0,-150)
-perdeu.setheading(315)
+perdeu.setheading(300)
 perdeu.pendown()
 
 perdeu.forward(75)
@@ -128,7 +131,7 @@ perdeu.home()
 
 #perna direita  if = 6
 perdeu.goto(0,-150)
-perdeu.setheading(225)
+perdeu.setheading(240)
 perdeu.pendown()
 
 perdeu.forward(75)

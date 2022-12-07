@@ -29,7 +29,7 @@ def main():
         if teste == mascara:
             n_vidas -= 1
             atualizar_vidas(vidas, n_vidas)
-            #desenhar_boneco(n_vidas)
+            desenhar_boneco(n_vidas)
 
     #avaliar e expor motivo de saída do loop
     perdeu_ou_ganhou(palavra, mascara, n_vidas)
@@ -43,8 +43,15 @@ def escolher_palavra(modalidade):
         palavras = json.load(read_file)
     
     grupo = choice(list(palavras[modalidade].keys()))
+    palavra = choice(palavras[modalidade][grupo])
 
-    return choice(palavras[modalidade][grupo])
+    t.penup()
+    t.goto(340,260)
+    t.pendown()
+    t.write('Grupo: ', True, align='right', font=('Arial',24,'normal'))
+    t.write(f'{grupo}', align='left', font=('Arial',24,'normal'))
+
+    return palavra
 
 def iniciar_turtle():
     '''Inicia o modulo turtle e cria um fundo'''
@@ -57,13 +64,13 @@ def iniciar_turtle():
 def escolher_modalidade():
     '''Input do usuário que define a dificuldade do jogo'''
     modalidade = t.textinput('Insira um número', '(1) Fácil ou (2) Difícil: ')
-    texto_mod = 'Facil' if modalidade == '1' else 'Dificil' #resolver problema de unicode UTF-8 no arquivo json
+    texto_mod = 'Fácil' if modalidade == '1' else 'Difícil' #resolver problema de unicode UTF-8 no arquivo json
 
     t.hideturtle()
     t.color('white')
 
     t.penup()
-    t.goto(300,300)
+    t.goto(340,300)
     t.pendown()
     t.write('Modalidade: ', True, align='right', font=('Arial',24,'normal'))
     t.write(f'{texto_mod}', align='left', font=('Arial',24,'normal'))
@@ -78,7 +85,7 @@ def atualizar_vidas(vidas, n_vidas):
     vidas.color('white')
 
     vidas.penup()
-    vidas.goto(300,270)
+    vidas.goto(340,220)
     vidas.pendown()
     vidas.write('Vidas: ', True, align='right', font=('Arial',24,'normal'))
     vidas.write(f'{n_vidas}', align='left', font=('Arial',24,'normal'))
@@ -150,6 +157,86 @@ def perdeu_ou_ganhou(palavra, mascara, n_vidas):
         t.write('Você ganhou!', align='center', font=('Arial',32,'bold'))
     elif n_vidas == 0:
         t.write(f'Você perdeu! A palavra era: {palavra}.', align='center', font=('Arial',32,'bold'))
+
+def desenhar_boneco(n_vidas):
+    boneco = t.Turtle()
+    boneco.speed(7)
+    boneco.width(4)
+    boneco.color('beige','beige')
+    boneco.hideturtle()
+
+    boneco.penup()
+
+    if n_vidas == 5: #cabeça
+        boneco.goto(-70,145)
+        boneco.pendown()
+        
+        boneco.begin_fill()
+        boneco.circle(30)
+        boneco.end_fill()
+    elif n_vidas == 4: #tronco
+        boneco.goto(-70,145)
+        boneco.pendown()
+
+        boneco.left(270)
+        boneco.forward(150)
+    elif n_vidas == 3: #braço esquerdo
+        boneco.goto(-70,120)
+        boneco.setheading(0)
+        boneco.pendown()
+
+        for x in range(45):
+            boneco.seth(x)
+            boneco.forward(2)
+    elif n_vidas == 2: #braço direito
+        boneco.goto(-70,120)
+        boneco.setheading(180)
+        boneco.pendown()
+
+        for x in range(180,135,-1):
+            boneco.seth(x)
+            boneco.forward(2)
+    elif n_vidas == 1: #perna esquerda
+        boneco.goto(-70,-5)
+        boneco.setheading(315)
+        boneco.pendown()
+
+        boneco.forward(75)
+    elif n_vidas == 0: #perna direita e olhos
+        boneco.goto(-70,-5)
+        boneco.setheading(225)
+        boneco.pendown()
+
+        boneco.forward(75)
+
+        boneco.color('red')
+        boneco.penup()
+        boneco.goto(-60,190)
+        boneco.setheading(315)
+        boneco.pendown()
+
+        boneco.forward(15)
+
+        boneco.penup()
+        boneco.goto(-50,190)
+        boneco.setheading(225)
+        boneco.pendown()
+
+        boneco.forward(15)
+
+        boneco.penup()
+        boneco.goto(-80,190)
+        boneco.setheading(225)
+        boneco.pendown()
+
+        boneco.forward(15)
+
+        boneco.penup()
+        boneco.goto(-90,190)
+        boneco.setheading(315)
+        boneco.pendown()
+
+        boneco.forward(15)
 
 if __name__ == '__main__':
     main()
