@@ -3,6 +3,7 @@ import turtle as t
 from random import choice
 from unicodedata import normalize, combining
 
+#Ajustes: Colocar chutes errados, Restart, posição de morto
 
 def main():
     '''executa as funções que implementam o jogo'''
@@ -15,6 +16,7 @@ def main():
 
     #criar objeto para atualizar vidas
     vidas = t.Turtle()
+    boneco = t.Turtle()
     n_vidas = 6
     atualizar_vidas(vidas, n_vidas)
 
@@ -29,7 +31,7 @@ def main():
         if teste == mascara:
             n_vidas -= 1
             atualizar_vidas(vidas, n_vidas)
-            desenhar_boneco(n_vidas)
+            desenhar_boneco(n_vidas, boneco)
 
     #avaliar e expor motivo de saída do loop
     perdeu_ou_ganhou(palavra, mascara, n_vidas)
@@ -158,8 +160,9 @@ def perdeu_ou_ganhou(palavra, mascara, n_vidas):
     elif n_vidas == 0:
         t.write(f'Você perdeu! A palavra era: {palavra}.', align='center', font=('Arial',32,'bold'))
 
-def desenhar_boneco(n_vidas):
-    boneco = t.Turtle()
+def desenhar_boneco(n_vidas, boneco):
+    '''desenha o boneco do jogo da forca no Turtle
+    int, Turtle object --> None'''
     boneco.speed(7)
     boneco.width(4)
     boneco.color('beige','beige')
