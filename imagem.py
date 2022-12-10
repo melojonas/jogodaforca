@@ -1,9 +1,10 @@
 import json
 import turtle as t
+from tkinter import Button
 from random import choice
 from unicodedata import normalize, combining
 
-#Ajustes: Colocar chutes errados, Restart, posição de morto
+#Ajustes: posição de morto
 
 def main():
     '''executa as funções que implementam o jogo'''
@@ -26,12 +27,18 @@ def main():
     #iniciar loop do jogo
     while ''.join(mascara) != palavra and n_vidas != 0:
         teste = mascara.copy()
-        mascara = atualizar_mascara(palavra, mascara, posicoes)
+        mascara, chute = atualizar_mascara(palavra, mascara, posicoes)
 
         if teste == mascara:
-            n_vidas -= 1
-            atualizar_vidas(vidas, n_vidas)
-            desenhar_boneco(n_vidas, boneco)
+            if chute == "":
+                continue
+            elif chute == None:
+                break                
+            else:
+                n_vidas -= 1 
+                atualizar_vidas(vidas, n_vidas)
+                desenhar_boneco(n_vidas, boneco)
+                cemiterio(chute, n_vidas)
 
     #avaliar e expor motivo de saída do loop
     perdeu_ou_ganhou(palavra, mascara, n_vidas)
@@ -62,6 +69,22 @@ def iniciar_turtle():
     screen.setup(1090,730)
     screen.screensize(1080,720)
     screen.bgpic('background.png')
+    
+    def reiniciar():
+        screen.reset()
+        main()
+    def fechar():
+        screen.bye()
+
+    canvas = screen.getcanvas()
+    botao_reiniciar = Button(canvas.master, text="Reiniciar", command=reiniciar)
+    botao_fechar = Button(canvas.master, text="Fechar", command=fechar)
+    
+    botao_reiniciar.pack()
+    botao_reiniciar.place(x=40, y=30)
+
+    botao_fechar.pack()
+    botao_fechar.place(x=100, y=30)
 
 def escolher_modalidade():
     '''Input do usuário que define a dificuldade do jogo'''
@@ -144,7 +167,7 @@ def atualizar_mascara(palavra, mascara, posicoes):
             t.write(word, align='center', font=('Arial',int(tam_letra),'normal'))
         i += 1
 
-    return mascara
+    return mascara, chute
 
 def perdeu_ou_ganhou(palavra, mascara, n_vidas):
     '''Avalia se o jogador completou a mascara ou zerou as vidas'''
@@ -163,7 +186,7 @@ def perdeu_ou_ganhou(palavra, mascara, n_vidas):
 def desenhar_boneco(n_vidas, boneco):
     '''desenha o boneco do jogo da forca no Turtle
     int, Turtle object --> None'''
-    boneco.speed(7)
+    boneco.speed(1)
     boneco.width(4)
     boneco.color('beige','beige')
     boneco.hideturtle()
@@ -205,13 +228,15 @@ def desenhar_boneco(n_vidas, boneco):
         boneco.pendown()
 
         boneco.forward(75)
-    elif n_vidas == 0: #perna direita e olhos
+    elif n_vidas == 0: 
+        #perna direita
         boneco.goto(-70,-5)
         boneco.setheading(225)
         boneco.pendown()
 
         boneco.forward(75)
 
+        #olhos
         boneco.color('red')
         boneco.penup()
         boneco.goto(-60,190)
@@ -240,6 +265,16 @@ def desenhar_boneco(n_vidas, boneco):
         boneco.pendown()
 
         boneco.forward(15)
+
+def cemiterio(chute, n_vidas):
+    '''Escreve os chutes errados na tela
+    str, int --> None'''
+    t.penup()
+    t.goto((-100 - n_vidas*60), -280) #Espaçamento de acordo com o número de vidas
+    t.pendown()
+    t.write(chute, move=True, align='right', font=('Arial',32,'normal'))
+    if n_vidas > 0:
+        t.write(" - ", align='left', font=('Arial',32,'normal'))
 
 if __name__ == '__main__':
     main()
