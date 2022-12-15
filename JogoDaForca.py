@@ -1,23 +1,31 @@
+#!/usr/bin/python3
+'''
+Autor: Jonas da Silva Melo, Gerson...
+Propósito: Jogo da Forca
+Contato: jonasmelo@ufrj.br
+'''
 import json
 import turtle as t
 from tkinter import Button
 from random import choice
 from unicodedata import normalize, combining
 
-#Ajustes: posição de morto
-
 def main():
-    '''executa as funções que implementam o jogo'''
+    
+    #iniciar o GUI
+    iniciarTurtle()
+
+    #objetos Turtle que serão atualizados
+    boneco = t.Turtle()
+    bracos = t.Turtle()
+    vidas = t.Turtle()
+
+    #escolher modalidade e sortear palavra
     modalidade = escolher_modalidade()
     palavra = escolher_palavra(modalidade)
     mascara = ['_'] * len(palavra)
 
-    #iniciar turtle
-    iniciar_turtle()
-
-    #criar objeto para atualizar vidas
-    vidas = t.Turtle()
-    boneco = t.Turtle()
+    
     n_vidas = 6
     atualizar_vidas(vidas, n_vidas)
 
@@ -33,43 +41,24 @@ def main():
             if chute == "":
                 continue
             elif chute == None:
-                break                
+                break              
             else:
                 n_vidas -= 1 
                 atualizar_vidas(vidas, n_vidas)
-                desenhar_boneco(n_vidas, boneco)
+                desenhar_boneco(n_vidas, boneco, bracos)
                 cemiterio(chute, n_vidas)
 
     #avaliar e expor motivo de saída do loop
     perdeu_ou_ganhou(palavra, mascara, n_vidas)
-
-    t.exitonclick()
-
-def escolher_palavra(modalidade):
-    '''retorna uma palavra conforme a modalidade escolhida'''
-
-    with open("data_file.json", "r") as read_file:
-        palavras = json.load(read_file)
     
-    grupo = choice(list(palavras[modalidade].keys()))
-    palavra = choice(palavras[modalidade][grupo])
+    t.Screen().mainloop()
 
-    t.penup()
-    t.goto(340,260)
-    t.pendown()
-    t.write('Grupo: ', True, align='right', font=('Arial',24,'normal'))
-    t.write(f'{grupo}', align='left', font=('Arial',24,'normal'))
-
-    return palavra
-
-def iniciar_turtle():
-    '''Inicia o modulo turtle e cria um fundo'''
-    t.title('Jogo da Forca')
+def iniciarTurtle():
     screen = t.Screen()
     screen.setup(1090,730)
     screen.screensize(1080,720)
     screen.bgpic('background.png')
-    
+
     def reiniciar():
         screen.reset()
         main()
@@ -101,6 +90,23 @@ def escolher_modalidade():
     t.write(f'{texto_mod}', align='left', font=('Arial',24,'normal'))
 
     return texto_mod
+
+def escolher_palavra(modalidade):
+    '''retorna uma palavra conforme a modalidade escolhida'''
+
+    with open("palavras.json", "r") as read_file:
+        palavras = json.load(read_file)
+    
+    grupo = choice(list(palavras[modalidade].keys()))
+    palavra = choice(palavras[modalidade][grupo])
+
+    t.penup()
+    t.goto(340,260)
+    t.pendown()
+    t.write('Grupo: ', True, align='right', font=('Arial',24,'normal'))
+    t.write(f'{grupo}', align='left', font=('Arial',24,'normal'))
+
+    return palavra
 
 def atualizar_vidas(vidas, n_vidas):
     '''cria um objeto do Turtle para atualizar o número de vidas'''
@@ -169,21 +175,7 @@ def atualizar_mascara(palavra, mascara, posicoes):
 
     return mascara, chute
 
-def perdeu_ou_ganhou(palavra, mascara, n_vidas):
-    '''Avalia se o jogador completou a mascara ou zerou as vidas'''
-    t.hideturtle()
-    t.color('red')
-
-    t.penup()
-    t.goto(0,0)
-    t.pendown()
-
-    if ''.join(mascara) == palavra:
-        t.write('Você ganhou!', align='center', font=('Arial',32,'bold'))
-    elif n_vidas == 0:
-        t.write(f'Você perdeu! A palavra era: {palavra}.', align='center', font=('Arial',32,'bold'))
-
-def desenhar_boneco(n_vidas, boneco):
+def desenhar_boneco(n_vidas, boneco, bracos):
     '''desenha o boneco do jogo da forca no Turtle
     int, Turtle object --> None'''
     boneco.speed(1)
@@ -192,6 +184,13 @@ def desenhar_boneco(n_vidas, boneco):
     boneco.hideturtle()
 
     boneco.penup()
+
+    bracos.speed(1)
+    bracos.width(4)
+    bracos.color('beige','beige')
+    bracos.hideturtle()
+
+    bracos.penup()
 
     if n_vidas == 5: #cabeça
         boneco.goto(-70,145)
@@ -207,21 +206,21 @@ def desenhar_boneco(n_vidas, boneco):
         boneco.left(270)
         boneco.forward(150)
     elif n_vidas == 3: #braço esquerdo
-        boneco.goto(-70,120)
-        boneco.setheading(0)
-        boneco.pendown()
+        bracos.goto(-70,120)
+        bracos.setheading(0)
+        bracos.pendown()
 
         for x in range(45):
-            boneco.seth(x)
-            boneco.forward(2)
+            bracos.seth(x)
+            bracos.forward(2)
     elif n_vidas == 2: #braço direito
-        boneco.goto(-70,120)
-        boneco.setheading(180)
-        boneco.pendown()
+        bracos.goto(-70,120)
+        bracos.setheading(180)
+        bracos.pendown()
 
         for x in range(180,135,-1):
-            boneco.seth(x)
-            boneco.forward(2)
+            bracos.seth(x)
+            bracos.forward(2)
     elif n_vidas == 1: #perna esquerda
         boneco.goto(-70,-5)
         boneco.setheading(315)
@@ -236,7 +235,23 @@ def desenhar_boneco(n_vidas, boneco):
 
         boneco.forward(75)
 
+        #braços
+        bracos.clear()
+        bracos.speed(0)
+
+        bracos.goto(-70,120)
+        bracos.setheading(240)
+        bracos.pendown()
+        bracos.forward(75)
+
+        bracos.up()
+        bracos.goto(-70,120)
+        bracos.setheading(300)
+        bracos.pendown()
+        bracos.forward(75)
+
         #olhos
+        boneco.speed(0)
         boneco.color('red')
         boneco.penup()
         boneco.goto(-60,190)
@@ -275,6 +290,20 @@ def cemiterio(chute, n_vidas):
     t.write(chute, move=True, align='right', font=('Arial',32,'normal'))
     if n_vidas > 0:
         t.write(" - ", align='left', font=('Arial',32,'normal'))
+
+def perdeu_ou_ganhou(palavra, mascara, n_vidas):
+    '''Avalia se o jogador completou a mascara ou zerou as vidas'''
+    t.hideturtle()
+    t.color('red')
+
+    t.penup()
+    t.goto(0,0)
+    t.pendown()
+
+    if ''.join(mascara) == palavra:
+        t.write('Você ganhou!', align='center', font=('Arial',32,'bold'))
+    elif n_vidas == 0:
+        t.write(f'Você perdeu! A palavra era: {palavra}.', align='center', font=('Arial',32,'bold'))
 
 if __name__ == '__main__':
     main()
