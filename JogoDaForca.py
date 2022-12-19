@@ -25,7 +25,7 @@ def main():
     palavra = escolher_palavra(modalidade)
     mascara = ['_'] * len(palavra)
 
-    
+    #iniciar vidas
     n_vidas = 6
     atualizar_vidas(vidas, n_vidas)
 
@@ -54,6 +54,8 @@ def main():
     t.Screen().mainloop()
 
 def iniciarTurtle():
+    '''função que inicia o GUI do Turtle e os botões "reiniciar" e "fechar" com Tkinter
+    None --> None'''
     screen = t.Screen()
     screen.setup(1090,730)
     screen.screensize(1080,720)
