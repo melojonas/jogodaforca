@@ -13,7 +13,7 @@ from unicodedata import normalize, combining
 def main():
     
     #iniciar o GUI
-    iniciarTurtle()
+    iniciar_turtle()
 
     #objetos Turtle que serão atualizados
     boneco = t.Turtle()
@@ -53,10 +53,11 @@ def main():
     
     t.Screen().mainloop()
 
-def iniciarTurtle():
+def iniciar_turtle():
     '''função que inicia o GUI do Turtle e os botões "reiniciar" e "fechar" com Tkinter
     None --> None'''
     screen = t.Screen()
+    screen.title('Jogo da Forca')
     screen.setup(1090,730)
     screen.screensize(1080,720)
     screen.bgpic('background.png')
